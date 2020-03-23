@@ -14,4 +14,11 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>ServerStatistics API</name>
+            <url>https://maven.pkg.github.com/MrDienns/ServerStatistics</url>
+        </repository>
+    </distributionManagement>
 </project>
