@@ -15,4 +15,5 @@ import java.lang.annotation.Target;
 public @interface ServerStatistic {
 
     String name();
+    String description();
 }
