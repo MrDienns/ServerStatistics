@@ -1,4 +1,4 @@
-package com.dyescape.serverstatistics.api;
+package io.serverstatistics.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

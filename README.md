@@ -1,6 +1,6 @@
 ![ServerStatistics](/assets/Header.png)
 ServerStatistics is a powerful Minecraft server plugin that generates advanced statistics about your server or network.
-Unlike any other statistics plugin, this plugin focusses on the server/network itself rather than the players on it.
+Unlike any other statistics plugin, this plugin focuses on the server/network itself rather than the players on it.
 Where this plugin shines however is the fact that everything is sent to an external panel, rather than creating a messy
 in-game setup. Another key feature of this plugin is that it hooks into other plugins as much as possible and generates
 statistics about those plugins too. If you wish to create statistics about your server using a simple plugin, you're at
@@ -25,7 +25,7 @@ mvn install
 To install the API in your project using Maven;
 ```xml
 <dependency>
-    <groupId>com.dyescape.serverstatistics</groupId>
+    <groupId>io.serverstatistics</groupId>
     <artifactId>api</artifactId>
     <version>2.0.0</version>
 </dependency>
@@ -34,7 +34,7 @@ To install the API in your project using Maven;
 ## Gradle
 To install the API in your project using Gradle;
 ```groovy
-compile group: 'com.dyescape.serverstatistics', name: 'api', version: '2.0.0'
+compile group: 'io.serverstatistics', name: 'api', version: '2.0.0'
 ```
 
 # Usage
