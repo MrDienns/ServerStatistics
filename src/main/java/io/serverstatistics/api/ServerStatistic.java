@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 public @interface ServerStatistic {
 
     String name();
-    String description() default "";
+    String description();
     String[] labels() default {};
     StatisticType type() default StatisticType.GAUGE;
 }
