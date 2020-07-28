@@ -1,0 +1,5 @@
+name: UniqueJoinCounter
+version: 1.0.0
+api-version: 1.15
+main: io.serverstatistics.api.example.uniquejoincounter.UniqueJoinCounter
+depend: [ServerStatistics]
