@@ -1,5 +1,6 @@
 package io.serverstatistics.api;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -34,7 +35,8 @@ public class StatisticRegistry {
      */
     public void addStatisticProvider(StatisticProvider provider) {
         this.providers.add(provider);
-        this.getInstancedStatisticMethodsFromProvider(provider).forEach(m -> this.methodInstanceLink.put(m, provider));
+        this.getAnnotatedMethodsFromProvider(provider, ServerStatistic.class).forEach(m -> this.methodInstanceLink.put(m, provider));
+        this.getAnnotatedMethodsFromProvider(provider, ServerTag.class).forEach(m -> this.methodInstanceLink.put(m, provider));
     }
 
     /**
@@ -60,9 +62,9 @@ public class StatisticRegistry {
      * @param provider {@link ServerStatistic}
      * @return {@link List<Method>}
      */
-    private List<Method> getInstancedStatisticMethodsFromProvider(StatisticProvider provider) {
+    private List<Method> getAnnotatedMethodsFromProvider(StatisticProvider provider, Class<? extends Annotation> annotation) {
         return Arrays.stream(provider.getClass().getMethods())
-                .filter(m -> m.isAnnotationPresent(ServerStatistic.class))
+                .filter(m -> m.isAnnotationPresent(annotation))
                 .filter(m -> !Modifier.isStatic(m.getModifiers()))
                 .collect(Collectors.toList());
     }
