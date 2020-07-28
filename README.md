@@ -111,3 +111,7 @@ public class ServerTypeTags implements StatisticProvider {
     }
 }
 ```
+
+# Example projects
+Below are a few very small example projects in this repository which showcase the usage of this API.
+* [UniqueJoinCounter](example/JoinCounter) - Shows a primitive statistic and global tag
