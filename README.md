@@ -7,6 +7,21 @@ statistics about those plugins too. If you wish to create statistics about your 
 the right place. You can for example create graphs on how many times the Jesus hack was blocked by any anti cheat! How
 cool is that?!
 
+# API design & decisions
+This project allows exposing metrics to various endpoints. For example, Prometheus is one of the supported data sources.
+Prometheus has a Java client as well. This uses a mostly static approach where you can, through one-liner builders,
+register collectors. These collectors (depending on the type) can then be increased with primitive numbers.
+
+When looking at the API for ServerStatistics, one may ask; why not follow the same approach? Reason is simple; I want
+this plugin (and thus the API) to properly be usable for metrics far complexer than merely some primitive numbers. When
+the v2 plugin integration & automated mapping is finished, you'd be able to return a list of entities in your metric
+rather than a primitive of the count. This is because the plugin can then apply complex mapping on this, and create
+labels & filters at runtime, dynamically, based on some configuration without having to change any of the underlying
+code. This should prevent 3rd party plugins from using this API to constantly be bothered with metrics not being fully
+up to people's expectations; some people want to have loads of filters on these entities, while some may not. By
+annotating functions, we can return the entire object and apply unique mapping, making it far more usable for a larger
+audience.
+
 # API usage
 This plugin offers an extremely easy to use API, that takes seconds to set up. First, you must add the dependency to
 your repository.
