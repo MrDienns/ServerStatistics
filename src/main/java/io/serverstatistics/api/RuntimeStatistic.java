@@ -1,5 +1,6 @@
 package io.serverstatistics.api;
 
+import java.util.Objects;
 import java.util.SortedMap;
 
 public class RuntimeStatistic {
@@ -43,5 +44,23 @@ public class RuntimeStatistic {
 
     public Object getValue() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RuntimeStatistic that = (RuntimeStatistic) o;
+        return Objects.equals(sourceName, that.sourceName) &&
+                Objects.equals(statisticName, that.statisticName) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(tags, that.tags) &&
+                type == that.type &&
+                Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceName, statisticName, description, tags, type, value);
     }
 }
