@@ -41,52 +41,73 @@ compile group: 'io.serverstatistics', name: 'api', version: '2.0.0'
 The API is extremely straight forward. There's two simple annotations that are available. There is the ServerStatistic
 annotation, which is used to mark public static methods as periodic statistical endpoints. The function may return any
 object, from primitives, to objects and collections. The plugin will take care of everything else. The method will
-periodically called, and the configured mapping will be applied on the returned metrics. 
+periodically be called, and the configured mapping will be applied on the returned metrics (coming soon). 
 
 Then there is also the ServerTag annotation which is a global tag annotation. You could use this to expose specific
 tags, such as server type, data center region or specific settings you want to use as tags, such as maximum player
-count.
+count. You can also simply configure tags, but if you want to specify them through code; you can.
+
+## Registering metrics
+All classes which have a ServerStatistic or ServerTag annotation must first be registered.
+```java
+@Override
+public void onEnable() {
+    StatisticRegistry.get().addStatisticProvider(new PlayerStatistic());
+}
+```
 
 ## Exposing metrics
 For example, reporting all online players;
 ```java
-/**
- * A simple method public the online players.
- * Any configured mapping applies to the returned object on the collection.
- */
-@ServerStatistic(name = "Online players")
-public static List<Player> getPlayerCount() {
-   return Bukkit.getOnlinePlayers();
+import io.serverstatistics.api.StatisticProvider;
+
+public class PlayerStatistic implements StatisticProvider {
+
+    /**
+     * A simple method public the online players.
+     * Any configured mapping applies to the returned object on the collection.
+     */
+    @ServerStatistic(name = "Online players")
+    public List<Player> getPlayerCount() {
+       return Bukkit.getOnlinePlayers();
+    }
 }
 ```
 
 Reporting current memory metrics;
 ```java
-/**
- * Returns the total allocated memory in bytes.
- */
-@ServerStatistic(name = "Total memory")
-public static long getTotalMemory() {
-    return Runtime.getRuntime().totalMemory();
-}
+public class RuntimeStatistics implements StatisticProvider {
 
-/**
- * Returns the total free memory in bytes.
- */
-@ServerStatistic(name = "Free memory")
-public static long getFreeMemory() {
-    return Runtime.getRuntime().freeMemory();
+    /**
+     * Returns the total allocated memory in bytes.
+     */
+    @ServerStatistic(name = "Total memory")
+    public long getTotalMemory() {
+        return Runtime.getRuntime().totalMemory();
+    }
+    
+    /**
+     * Returns the total free memory in bytes.
+     */
+    @ServerStatistic(name = "Free memory")
+    public long getFreeMemory() {
+        return Runtime.getRuntime().freeMemory();
+    }
 }
 ```
 
 ## Exposing tags
-For example, a simple tag which exposes the server type;
+In addition to global tags being configurable, you can also specify them in code. For example, a simple tag which
+exposes the server type;
 ```java
-/**
- * A simple method which returns the server type.
- */
-@ServerTag(name = "Server type")
-public static String getServerType() {
-    return "Survival";
+public class ServerTypeTags implements StatisticProvider {
+
+    /**
+     * A simple method which returns the server type.
+     */
+    @ServerTag(name = "Server type")
+    public String getServerType() {
+        return "Survival";
+    }
 }
 ```
