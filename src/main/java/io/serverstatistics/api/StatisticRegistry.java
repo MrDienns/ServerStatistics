@@ -40,6 +40,13 @@ public class StatisticRegistry {
     }
 
     /**
+     * Removes all registered {@link StatisticProvider} classes.
+     */
+    public void removeAllStatisticProviders() {
+        this.providers.clear();
+    }
+
+    /**
      * Returns a {@link Set<StatisticProvider>} with all registered {@link StatisticProvider} implementations.
      * @return {@link Set<StatisticProvider>}
      */
