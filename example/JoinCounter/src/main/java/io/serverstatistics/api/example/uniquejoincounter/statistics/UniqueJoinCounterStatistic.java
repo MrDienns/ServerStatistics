@@ -1,9 +1,5 @@
 package io.serverstatistics.api.example.uniquejoincounter.statistics;
 
-import io.serverstatistics.api.ServerStatistic;
-import io.serverstatistics.api.ServerTag;
-import io.serverstatistics.api.StatisticProvider;
-import io.serverstatistics.api.StatisticType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

@@ -1,6 +1,5 @@
 package io.serverstatistics.api.example.uniquejoincounter;
 
-import io.serverstatistics.api.StatisticRegistry;
 import io.serverstatistics.api.example.uniquejoincounter.statistics.UniqueJoinCounterStatistic;
 import org.bukkit.plugin.java.JavaPlugin;
 

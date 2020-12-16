@@ -74,7 +74,7 @@ public void onEnable() {
 ## Exposing metrics
 For example, reporting all online players;
 ```java
-import io.serverstatistics.api.StatisticProvider;
+
 
 public class PlayerStatistic implements StatisticProvider {
 
