@@ -33,4 +33,11 @@ public interface ServerStatistic<ValueType, Value> {
      * @return {@link Class<ValueType>} The value generic of this statistic.
      */
     Class<ValueType> getValueType();
+
+    /**
+     * Called when the statistic is enabled.
+     */
+    default void onEnable() {
+
+    }
 }
