@@ -40,4 +40,12 @@ public interface ServerStatistic<ValueType, Value> {
     default void onEnable() {
 
     }
+
+    /**
+     * Called to systematically check if this statistic can be enabled.
+     * @return boolean
+     */
+    default boolean shouldEnable() {
+        return true;
+    }
 }
