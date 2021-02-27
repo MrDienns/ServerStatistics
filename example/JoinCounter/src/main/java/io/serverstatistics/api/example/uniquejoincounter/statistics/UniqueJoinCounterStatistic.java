@@ -5,13 +5,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-/**
- * The UniqueJoinCounter implements {@link StatisticProvider} so it can automatically be picked up by ServerStatistcs.
- * We have no additional criteria for whether or not this provider should be enabled or not, we don't override the
- * {@link #shouldEnable()} function. We also implement {@link Listener} so we can listen for some events we need for
- * this statistic.
- */
-public class UniqueJoinCounterStatistic implements StatisticProvider, Listener {
+import io.serverstatistics.api.ServerStatistic;
+
+public class UniqueJoinCounterStatistic implements ServerStatistic<Integer, Integer>, Listener {
 
     private int uniqueJoins;
 
@@ -42,25 +38,23 @@ public class UniqueJoinCounterStatistic implements StatisticProvider, Listener {
         }
     }
 
-    /**
-     * This function will be called by ServerStatistics. The implementation of the {@link StatisticProvider}
-     * interface plus methods on this class with the {@link ServerStatistic} annotation, causes ServerStatistics to
-     * automatically find and register this metric.
-     * @return int
-     */
-    @ServerStatistic(name = "Unique joins", description = "Keeps track of the new players that joined the server",
-            type = StatisticType.COUNTER)
-    public int getUniqueJoins() {
+    @Override
+    public String getName() {
+        return "Unique joins";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Counts the unique player joins";
+    }
+
+    @Override
+    public Integer getValue() {
         return this.uniqueJoins;
     }
 
-    /**
-     * With the {@link ServerTag} annotation, you can return compiled tags. You may return anything here. It will show
-     * up in the metrics as selectable filters.
-     * @return String
-     */
-    @ServerTag(name = "Version")
-    public String getVersionTag() {
-        return "v1.0.0";
+    @Override
+    public Class<Integer> getValueType() {
+        return null;
     }
 }

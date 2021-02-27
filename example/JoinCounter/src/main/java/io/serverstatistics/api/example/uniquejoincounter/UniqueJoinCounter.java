@@ -1,7 +1,9 @@
 package io.serverstatistics.api.example.uniquejoincounter;
 
-import io.serverstatistics.api.example.uniquejoincounter.statistics.UniqueJoinCounterStatistic;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import io.serverstatistics.api.BasicServerStatisticRegistry;
+import io.serverstatistics.api.example.uniquejoincounter.statistics.UniqueJoinCounterStatistic;
 
 public class UniqueJoinCounter extends JavaPlugin {
 
@@ -12,6 +14,7 @@ public class UniqueJoinCounter extends JavaPlugin {
 
         // Then pass it into the singleton defined StatisticRegistry. For the time being, this must be done during
         // the onEnable sequence.
-        StatisticRegistry.get().addStatisticProvider(uniqueJoinCounterStatistic);
+        BasicServerStatisticRegistry.get().addStatistic(uniqueJoinCounterStatistic);
+        this.getServer().getPluginManager().registerEvents(uniqueJoinCounterStatistic, this);
     }
 }
