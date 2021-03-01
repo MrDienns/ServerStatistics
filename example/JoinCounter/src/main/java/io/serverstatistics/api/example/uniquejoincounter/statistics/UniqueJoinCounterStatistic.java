@@ -55,6 +55,6 @@ public class UniqueJoinCounterStatistic implements ServerStatistic<Integer, Inte
 
     @Override
     public Class<Integer> getValueType() {
-        return null;
+        return Integer.class;
     }
 }
