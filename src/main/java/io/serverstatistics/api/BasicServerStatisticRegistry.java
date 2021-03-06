@@ -20,19 +20,26 @@ public class BasicServerStatisticRegistry implements ServerStatisticRegistry {
 
     public void addStatistic(ServerStatistic<?, ?> ...statistics) {
         for (ServerStatistic<?, ?> statistic : statistics) {
-            LOGGER.info(String.format("Registered statistic '%s'", statistic.getName()));
+            LOGGER.info(String.format("Registered statistic '%s'", sanitizeStatisticName(statistic)));
             this.statistics.add(statistic);
         }
     }
 
     public void removeStatistic(ServerStatistic<?, ?> ...statistics) {
         for (ServerStatistic<?, ?> statistic : statistics) {
-            LOGGER.info(String.format("Unregistered statistic '%s'", statistic.getName()));
+            LOGGER.info(String.format("Unregistered statistic '%s'", sanitizeStatisticName(statistic)));
             this.statistics.remove(statistic);
         }
     }
 
     public Collection<ServerStatistic<?, ?>> getStatistics() {
         return this.statistics;
+    }
+
+    private String sanitizeStatisticName(ServerStatistic<?, ?> statistic) {
+        return statistic.getName()
+                .replace(" ", "-")
+                .replace(".", "-")
+                .toLowerCase();
     }
 }
