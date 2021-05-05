@@ -1,4 +1,6 @@
-package io.serverstatistics.api;
+package io.serverstatistics.api.registry;
+
+import io.serverstatistics.api.ServerStatistic;
 
 import java.util.Collection;
 import java.util.HashSet;
